@@ -50,7 +50,7 @@ namespace Programowanie_zaawansowane_zaliczenie
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=ContactCategories}/{action=Index}/{id?}");
+                    pattern: "{controller=Contact}/{action=Index}/{id?}");
             });
         }
     }
