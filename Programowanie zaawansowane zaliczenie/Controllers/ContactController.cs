@@ -69,22 +69,17 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(Contacts.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: ContactController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, ContactVievModel collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ContactVievModel contact = Contacts.FirstOrDefault(x => x.Id == id);
+            Contacts.Remove(contact);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
