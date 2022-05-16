@@ -47,22 +47,23 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(Contacts.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: ContactController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ContactVievModel collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ContactVievModel contact = Contacts.FirstOrDefault(x => x.Id == id);
+            contact.Adress = collection.Adress;
+            contact.ContactCategory = collection.ContactCategory;
+            contact.Email = collection.Email;
+            contact.FbLink = collection.FbLink;
+            contact.FirstName = collection.FirstName;
+            contact.LastName = collection.LastName;
+            contact.PhoneNumber = collection.PhoneNumber;
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ContactController/Delete/5
