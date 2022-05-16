@@ -1,10 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Programowanie_zaawansowane_zaliczenie.Models;
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
 {
     public class ContactController : Controller
     {
+        private static IList<ContactVievModel> tasks = new List<ContactVievModel>()
+        {
+            new ContactVievModel(){ Id=1, FirstName= "Wizyta u lekarza", LastName= "Godzina 17:00", PhoneNumber=false },
+            new ContactVievModel(){ TaskId=2, Name= "Zrobić obiad", Description= "Pierogi", Done=false },
+        };
         // GET: ContactController
         public ActionResult Index()
         {
