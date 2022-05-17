@@ -1,20 +1,17 @@
 ﻿@model IEnumerable<Programowanie_zaawansowane_zaliczenie.Models.ContactCategories>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista kategorii kontaktów";
 }
 
-<h1>Index</h1>
+<h1>Lista kategorii kontaktów</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj kategorię</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.CategoryName)
             </th>
@@ -25,15 +22,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edytuj", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Usuń", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }
