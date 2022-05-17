@@ -1,83 +1,70 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Programowanie_zaawansowane_zaliczenie.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Programowanie_zaawansowanie_zaliczenie2.Controllers
 {
     public class ContactCategoriesController : Controller
     {
+        private static IList<ContactCategories> contactsCategories = new List<ContactCategories>()
+        {
+            new ContactCategories(){ Id=1,CategoryName="test" },
+            new ContactCategories(){ Id=2,CategoryName="test2" }
+        };
         // GET: ContactCategoriesController
         public ActionResult Index()
         {
-            return View();
-        }
-
-        // GET: ContactCategoriesController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            return View(contactsCategories);
         }
 
         // GET: ContactCategoriesController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new ContactCategories());
         }
 
         // POST: ContactCategoriesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ContactCategories collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            contactsCategories.Add(collection);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ContactCategoriesController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(contactsCategories.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: ContactCategoriesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ContactCategories collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ContactCategories contactCategory = contactsCategories.FirstOrDefault(x => x.Id == id);
+            contactCategory.Id = contactCategory.Id;
+            contactCategory.CategoryName = collection.CategoryName;
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ContactCategoriesController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(contactsCategories.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: ContactCategoriesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, ContactCategories collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ContactCategories contact = contactsCategories.FirstOrDefault(x => x.Id == id);
+            contactsCategories.Remove(contact);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
