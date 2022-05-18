@@ -8,7 +8,7 @@ namespace Programowanie_zaawansowanie_zaliczenie2.Controllers
 {
     public class ContactCategoriesController : Controller
     {
-        private static IList<ContactCategories> contactsCategories = new List<ContactCategories>()
+        public List<ContactCategories> contactsCategories = new List<ContactCategories>()
         {
             new ContactCategories(){ Id=1,CategoryName="test" },
             new ContactCategories(){ Id=2,CategoryName="test2" }
@@ -65,6 +65,10 @@ namespace Programowanie_zaawansowanie_zaliczenie2.Controllers
             ContactCategories contact = contactsCategories.FirstOrDefault(x => x.Id == id);
             contactsCategories.Remove(contact);
             return RedirectToAction(nameof(Index));
+        }
+        public IList<ContactCategories> CategoriesGet()
+        {
+            return contactsCategories;
         }
     }
 }
