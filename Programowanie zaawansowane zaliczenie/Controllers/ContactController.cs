@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Programowanie_zaawansowane_zaliczenie.Models;
 using System.Linq;
+using Programowanie_zaawansowanie_zaliczenie2.Controllers;
+
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly BloggingContext _context;
         private static IList<ContactVievModel> Contacts = new List<ContactVievModel>()
         {
             new ContactVievModel(){ Id=1, FirstName= "Wizyta u lekarza", LastName= "Godzina 17:00", 
