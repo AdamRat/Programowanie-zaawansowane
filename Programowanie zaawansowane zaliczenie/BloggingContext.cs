@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -15,16 +16,8 @@ namespace Programowanie_zaawansowane_zaliczenie
 
         public string DbPath { get; }
 
-        public BloggingContext()
-        {
-            DbPath = System.IO.Path.Join
-                (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Contacts.db");
-        }
-
-        // The following configures EF to create a Sqlite database file in the
-        // special "local" folder for your platform.
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source={DbPath}");
+            => options.UseSqlite($"Data Source={System.IO.Path.Join(Path.Combine(Directory.GetCurrentDirectory()), "Contacts.db")}");
     }
 
     

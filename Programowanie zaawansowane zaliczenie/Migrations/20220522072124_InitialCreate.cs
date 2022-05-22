@@ -2,7 +2,7 @@
 
 namespace Programowanie_zaawansowane_zaliczenie.Migrations
 {
-    public partial class Initialaatt : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

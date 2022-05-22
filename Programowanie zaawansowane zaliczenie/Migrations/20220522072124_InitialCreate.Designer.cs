@@ -9,8 +9,8 @@ using Programowanie_zaawansowane_zaliczenie;
 namespace Programowanie_zaawansowane_zaliczenie.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20220519152829_Initialaatt")]
-    partial class Initialaatt
+    [Migration("20220522072124_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
