@@ -8,7 +8,7 @@ using Programowanie_zaawansowane_zaliczenie.Models;
 
 namespace Programowanie_zaawansowane_zaliczenie
 {
-    public class BloggingContext : DbContext
+    public class DatabaseContext : DbContext
     {
         public DbSet<Adresses> Adresses { get; set; }
         public DbSet<ContactCategories> ContactCategories { get; set; }
@@ -17,7 +17,7 @@ namespace Programowanie_zaawansowane_zaliczenie
         public string DbPath { get; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source={System.IO.Path.Join(Path.Combine(Directory.GetCurrentDirectory()), "Contacts.db")}");
+            => options.UseSqlite($"Data Source={System.IO.Path.Join(Path.Combine(Directory.GetCurrentDirectory()), @"Data\Contacts.db")}");
     }
 
     

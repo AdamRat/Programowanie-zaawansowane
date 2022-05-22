@@ -9,7 +9,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
 {
     public class ContactController : Controller
     {
-        private readonly BloggingContext _context;
+        private readonly DatabaseContext _context;
         private static IList<ContactVievModel> Contacts = new List<ContactVievModel>()
         {
             new ContactVievModel(){ Id=1, FirstName= "Wizyta u lekarza", LastName= "Godzina 17:00", 

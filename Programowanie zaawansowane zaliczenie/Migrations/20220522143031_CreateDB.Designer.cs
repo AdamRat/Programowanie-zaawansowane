@@ -8,9 +8,9 @@ using Programowanie_zaawansowane_zaliczenie;
 
 namespace Programowanie_zaawansowane_zaliczenie.Migrations
 {
-    [DbContext(typeof(BloggingContext))]
-    [Migration("20220522072124_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(DatabaseContext))]
+    [Migration("20220522143031_CreateDB")]
+    partial class CreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

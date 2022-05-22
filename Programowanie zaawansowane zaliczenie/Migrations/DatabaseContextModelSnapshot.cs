@@ -7,8 +7,8 @@ using Programowanie_zaawansowane_zaliczenie;
 
 namespace Programowanie_zaawansowane_zaliczenie.Migrations
 {
-    [DbContext(typeof(BloggingContext))]
-    partial class BloggingContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DatabaseContext))]
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
