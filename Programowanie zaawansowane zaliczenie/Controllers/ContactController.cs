@@ -30,11 +30,14 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
             return View(Contacts.FirstOrDefault(x=>x.Id==id));
         }
 
-        
+        private ContactCategoriesController ContactCategoriesConoler = new ContactCategoriesController();
+
+
         // GET: ContactController/Create
         public ActionResult Create()
         {
-            var list = new List<string> { "Rodzina", "szkoła", "praca"};
+            List<string> list = ContactCategoriesConoler.CategoriesGet();
+            
             ViewBag.list = list;
             return View(new ContactVievModel());
         }
