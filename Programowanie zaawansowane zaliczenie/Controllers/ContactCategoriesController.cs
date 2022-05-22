@@ -67,14 +67,5 @@ namespace Programowanie_zaawansowanie_zaliczenie2.Controllers
             contactsCategories.Remove(contact);
             return RedirectToAction(nameof(Index));
         }
-        public List<string> CategoriesGet()
-        {
-            List<string> categoryNamesList = new List<string> { };
-            for (int i = 0; i < contactsCategories.Count; i++)
-            {
-                categoryNamesList.Add(contactsCategories[i].CategoryName);
-            }
-            return categoryNamesList;
-        }
     }
 }

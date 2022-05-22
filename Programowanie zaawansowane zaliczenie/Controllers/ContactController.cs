@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Programowanie_zaawansowane_zaliczenie.Models;
 using System.Linq;
-using Programowanie_zaawansowanie_zaliczenie2.Controllers;
 
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
@@ -32,15 +31,11 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
             return View(Contacts.FirstOrDefault(x=>x.Id==id));
         }
 
-        private ContactCategoriesController ContactCategoriesConoler = new ContactCategoriesController();
 
 
         // GET: ContactController/Create
         public ActionResult Create()
         {
-            List<string> list = ContactCategoriesConoler.CategoriesGet();
-
-            ViewBag.list = list;
             return View(new ContactVievModel());
         }
 
