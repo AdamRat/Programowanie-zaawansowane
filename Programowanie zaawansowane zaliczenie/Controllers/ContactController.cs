@@ -37,7 +37,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         public ActionResult Create()
         {
             List<string> list = ContactCategoriesConoler.CategoriesGet();
-            
+
             ViewBag.list = list;
             return View(new ContactVievModel());
         }

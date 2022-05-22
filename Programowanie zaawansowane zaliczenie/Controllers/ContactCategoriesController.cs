@@ -8,10 +8,11 @@ namespace Programowanie_zaawansowanie_zaliczenie2.Controllers
 {
     public class ContactCategoriesController : Controller
     {
-        private List<ContactCategories> contactsCategories = new List<ContactCategories>()
+        private static List<ContactCategories> contactsCategories = new List<ContactCategories>()
         {
             new ContactCategories(){ Id=1,CategoryName="test" },
-            new ContactCategories(){ Id=2,CategoryName="test2" }
+            new ContactCategories(){ Id=2,CategoryName="test2" },
+            new ContactCategories(){Id=3,CategoryName="dom"}
         };
         // GET: ContactCategoriesController
         public ActionResult Index()
