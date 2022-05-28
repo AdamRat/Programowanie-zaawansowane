@@ -4,7 +4,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Models
 {
     public class ContactVievModel
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
         [DisplayName("Imię")]
         public string FirstName { get; set; }
         [DisplayName("Nazwisko")]

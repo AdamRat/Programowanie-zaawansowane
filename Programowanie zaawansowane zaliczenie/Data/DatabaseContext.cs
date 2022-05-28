@@ -10,6 +10,10 @@ namespace Programowanie_zaawansowane_zaliczenie
 {
     public class DatabaseContext : DbContext
     {
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+            : base(options)
+        {
+        }
         public DbSet<Adresses> Adresses { get; set; }
         public DbSet<ContactCategories> ContactCategories { get; set; }
         public DbSet<ContactVievModel> ContactVievModel { get; set; }

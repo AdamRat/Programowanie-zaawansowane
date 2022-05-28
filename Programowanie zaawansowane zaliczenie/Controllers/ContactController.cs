@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using Programowanie_zaawansowane_zaliczenie.Models;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
@@ -10,6 +11,143 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
     public class ContactController : Controller
     {
         private readonly DatabaseContext _context;
+
+        public ContactController(DatabaseContext context)
+        {
+            _context = context;
+        }
+
+        // GET: ContactController
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.ContactVievModel.ToListAsync());
+        }
+
+        // GET: ContactController/Details/5
+        public async Task<IActionResult> Details(uint? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var contact = await _context.ContactVievModel
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            return View(contact);
+        }
+
+        // GET: ContactController/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: ContactController/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Adress,PhoneNumber,Email,FbLink,ContactCategory")] ContactVievModel contactVievModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(contactVievModel);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(contactVievModel);
+        }
+
+        // GET: ContactController/Edit/5
+        public async Task<IActionResult> Edit(uint? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var contact = await _context.ContactVievModel.FindAsync(id);
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            return View(contact);
+        }
+
+        // POST: ContactController/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(uint id, [Bind("Id,FirstName,LastName,Adress,PhoneNumber,Email,FbLink,ContactCategory")] ContactVievModel contactVievModel)
+        {
+            if (id != contactVievModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(contactVievModel);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ContactExists(contactVievModel.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(contactVievModel);
+        }
+
+        // GET: ContactController/Delete/5
+        public async Task<IActionResult> Delete(uint? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var contactVievModel = await _context.ContactVievModel
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (contactVievModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(contactVievModel);
+        }
+
+        // POST: ContactController/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(uint id)
+        {
+            var contact = await _context.ContactVievModel.FindAsync(id);
+            _context.ContactVievModel.Remove(contact);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ContactExists(uint id)
+        {
+            return _context.ContactVievModel.Any(e => e.Id == id);
+        }
+        /*private readonly DatabaseContext _context;
         private static IList<ContactVievModel> Contacts = new List<ContactVievModel>()
         {
             new ContactVievModel(){ Id=1, FirstName= "Wizyta u lekarza", LastName= "Godzina 17:00", 
@@ -84,6 +222,6 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
             ContactVievModel contact = Contacts.FirstOrDefault(x => x.Id == id);
             Contacts.Remove(contact);
             return RedirectToAction(nameof(Index));
-        }
+        }*/
     }
 }
