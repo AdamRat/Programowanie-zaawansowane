@@ -6,10 +6,15 @@ namespace Programowanie_zaawansowane_zaliczenie.Models
 {
     public class ContactCategories
     {
+        string _categoryName;
         public static List<string> CategoriesGet { get; internal set; }
         public uint Id { get; set; }
         [DataType(DataType.Text)]
         [DisplayName("Nazwa kategorii")]
-        public string CategoryName { get; set; }
+        public string CategoryName 
+        {
+            get { return _categoryName; }
+            set { _categoryName = (char.ToUpper(value[0]) + value.Substring(1)); }
+        }
     }
 }

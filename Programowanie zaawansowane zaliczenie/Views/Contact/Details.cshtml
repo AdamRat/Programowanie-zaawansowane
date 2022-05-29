@@ -72,6 +72,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edytuj", "Edit", new {  id = Model.Id  }) |
-    <a asp-action="Index">Wróć do listy</a>
+    @Html.ActionLink("Edytuj", "Edit", new {  id = Model.Id  }, new { @class = "btn btn-success" }) |
+    <a class="btn btn-info" asp-action="Index">Wróć do listy</a>
 </div>
