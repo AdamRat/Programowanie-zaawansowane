@@ -60,6 +60,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController/Create
         public IActionResult Create()
         {
+            ViewBag.List = _context.ContactCategories.ToList();
             return View();
         }
 
@@ -70,6 +71,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Adress,PhoneNumber,Email,FbLink,ContactCategory")] ContactVievModel contactVievModel)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(contactVievModel);
