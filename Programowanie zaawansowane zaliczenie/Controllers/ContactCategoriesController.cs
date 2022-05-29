@@ -4,6 +4,7 @@ using Programowanie_zaawansowane_zaliczenie;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Programowanie_zaawansowanie_zaliczenie.Controllers
 {
@@ -147,64 +148,76 @@ namespace Programowanie_zaawansowanie_zaliczenie.Controllers
             return _context.ContactCategories.Any(e => e.Id == id);
         }
 
+        public List<string> Test()
+        {
+            List<string> test = new();
+            for (int i = 0; i < _context.ContactCategories.ToList().Count; i++)
+            {
+                if (_context.ContactCategories.Find(i).CategoryName !=null)
+                {
+                    test.Add(_context.ContactCategories.Find(i).CategoryName);
+                }
+            }
+            return test;
+        }
         /*private static List<ContactCategories> contactsCategories = new List<ContactCategories>()
-        {
-            new ContactCategories(){ Id=1,CategoryName="test" },
-            new ContactCategories(){ Id=2,CategoryName="test2" },
-            new ContactCategories(){Id=3,CategoryName="dom"}
-        };
-        // GET: ContactCategoriesController
-        public ActionResult Index()
-        {
-            return View(contactsCategories);
-        }
+{
+   new ContactCategories(){ Id=1,CategoryName="test" },
+   new ContactCategories(){ Id=2,CategoryName="test2" },
+   new ContactCategories(){Id=3,CategoryName="dom"}
+};
+// GET: ContactCategoriesController
+public ActionResult Index()
+{
+   return View(contactsCategories);
+}
 
-        // GET: ContactCategoriesController/Create
-        public ActionResult Create()
-        {
-            return View(new ContactCategories());
-        }
+// GET: ContactCategoriesController/Create
+public ActionResult Create()
+{
+   return View(new ContactCategories());
+}
 
-        // POST: ContactCategoriesController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(ContactCategories collection)
-        {
-            contactsCategories.Add(collection);
-            return RedirectToAction(nameof(Index));
-        }
+// POST: ContactCategoriesController/Create
+[HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult Create(ContactCategories collection)
+{
+   contactsCategories.Add(collection);
+   return RedirectToAction(nameof(Index));
+}
 
-        // GET: ContactCategoriesController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View(contactsCategories.FirstOrDefault(x => x.Id == id));
-        }
+// GET: ContactCategoriesController/Edit/5
+public ActionResult Edit(int id)
+{
+   return View(contactsCategories.FirstOrDefault(x => x.Id == id));
+}
 
-        // POST: ContactCategoriesController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ContactCategories collection)
-        {
-            ContactCategories contactCategory = contactsCategories.FirstOrDefault(x => x.Id == id);
-            contactCategory.Id = contactCategory.Id;
-            contactCategory.CategoryName = collection.CategoryName;
-            return RedirectToAction(nameof(Index));
-        }
+// POST: ContactCategoriesController/Edit/5
+[HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult Edit(int id, ContactCategories collection)
+{
+   ContactCategories contactCategory = contactsCategories.FirstOrDefault(x => x.Id == id);
+   contactCategory.Id = contactCategory.Id;
+   contactCategory.CategoryName = collection.CategoryName;
+   return RedirectToAction(nameof(Index));
+}
 
-        // GET: ContactCategoriesController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View(contactsCategories.FirstOrDefault(x => x.Id == id));
-        }
+// GET: ContactCategoriesController/Delete/5
+public ActionResult Delete(int id)
+{
+   return View(contactsCategories.FirstOrDefault(x => x.Id == id));
+}
 
-        // POST: ContactCategoriesController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, ContactCategories collection)
-        {
-            ContactCategories contact = contactsCategories.FirstOrDefault(x => x.Id == id);
-            contactsCategories.Remove(contact);
-            return RedirectToAction(nameof(Index));
-        }*/
+// POST: ContactCategoriesController/Delete/5
+[HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult Delete(int id, ContactCategories collection)
+{
+   ContactCategories contact = contactsCategories.FirstOrDefault(x => x.Id == id);
+   contactsCategories.Remove(contact);
+   return RedirectToAction(nameof(Index));
+}*/
     }
 }
