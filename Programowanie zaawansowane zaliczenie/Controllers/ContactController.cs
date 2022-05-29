@@ -19,12 +19,17 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         }
 
         // GET: ContactController
-        public ActionResult Index(string sortOrder)
+        public ViewResult Index(string sortOrder, string searchString)
         {
             ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
             ViewBag.CategorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
             var contacts = from s in _context.ContactVievModel
                            select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                contacts = contacts.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "lastName_desc":
