@@ -4,7 +4,7 @@ using Programowanie_zaawansowane_zaliczenie.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
+using System;
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
 {
@@ -18,9 +18,25 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         }
 
         // GET: ContactController
-        public async Task<IActionResult> Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(await _context.ContactVievModel.ToListAsync());
+            ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
+            ViewBag.CategorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
+            var contacts = from s in _context.ContactVievModel
+                           select s;
+            switch (sortOrder)
+            {
+                case "lastName_desc":
+                    contacts = contacts.OrderByDescending(s => s.LastName);
+                    break;
+                case "category_desc":
+                    contacts = contacts.OrderByDescending(s => s.ContactCategory);
+                    break;
+                default:
+                    contacts = contacts.OrderBy(s => s.LastName);
+                    break;
+            }
+            return View(contacts.ToList());
         }
 
         // GET: ContactController/Details/5
