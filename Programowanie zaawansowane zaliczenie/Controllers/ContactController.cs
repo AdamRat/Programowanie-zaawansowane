@@ -95,7 +95,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Adress,PhoneNumber,Email,FbLink,ContactCategory")] ContactVievModel contactVievModel)
         {
-            
+
             if (ModelState.IsValid)
             {
                 _context.Add(contactVievModel);
@@ -143,7 +143,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactExists(contactVievModel.Id))
+                    if (!ContactExists(((uint)contactVievModel.Id)))
                     {
                         return NotFound();
                     }

@@ -8,7 +8,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Models
     {
         string _categoryName;
         public static List<string> CategoriesGet { get; internal set; }
-        public uint Id { get; set; }
+        public int Id { get; set; }
         [DataType(DataType.Text)]
         [DisplayName("Nazwa kategorii")]
         public string CategoryName 

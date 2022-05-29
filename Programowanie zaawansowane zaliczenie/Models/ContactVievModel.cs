@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programowanie_zaawansowane_zaliczenie.Models
 {
@@ -6,7 +7,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Models
     {
         string _firstName;
         string _lastName;
-        public uint Id { get; set; }
+        public int Id { get; set; }
         [DisplayName("Imię")]
         public string FirstName
         {
