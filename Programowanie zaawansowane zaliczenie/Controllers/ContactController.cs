@@ -51,13 +51,13 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
                     contacts = contacts.OrderByDescending(s => s.LastName);
                     break;
                 case "category_desc":
-                    contacts = contacts.OrderByDescending(s => s.ContactCategory);
+                    contacts = contacts.OrderByDescending(s => s.ContactCategory.CategoryName);
                     break;
                 default:
                     contacts = contacts.OrderBy(s => s.LastName);
                     break;
             }
-            int pageSize = 2;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(contacts.ToPagedList(pageNumber, pageSize));
         }
