@@ -1,7 +1,9 @@
-﻿@model IEnumerable<Programowanie_zaawansowane_zaliczenie.Models.ContactVievModel>
+﻿@model X.PagedList.IPagedList<Programowanie_zaawansowane_zaliczenie.Models.ContactVievModel>
+@using X.PagedList.Mvc.Core;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Lista kontaktów";
 }
 
 <h1 class="text-center">Twoja lista kontaktów</h1>
@@ -9,27 +11,27 @@
 <p>
     <a class="btn btn-success" asp-action="Create">Dodaj kontakt</a>
 </p>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Contact", FormMethod.Get))
 {
     <p>
-        Szukaj kontaktu: @Html.TextBox("SearchString")
-        <input class = "btn btn-success btn-sm" type="submit" value="Szukaj" />
+        Szukaj kontaktu: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input class="btn btn-success btn-sm" type="submit" value="Szukaj" />
     </p>
 }
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.ActionLink("Nazwisko", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                @Html.ActionLink("Nazwisko", "Index", new { sortOrder = ViewBag.LastNameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayName("Imię")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayName("Numer Telefonu")
             </th>
             <th>
-                @Html.ActionLink("Kategoria", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                @Html.ActionLink("Kategoria", "Index", new { sortOrder = ViewBag.LastNameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th></th>
         </tr>
@@ -59,3 +61,8 @@
         }
     </tbody>
 </table>
+<br />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

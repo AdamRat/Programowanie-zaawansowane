@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
 {
@@ -19,10 +20,23 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         }
 
         // GET: ContactController
-        public ViewResult Index(string sortOrder, string searchString)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
             ViewBag.CategorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var contacts = from s in _context.ContactVievModel
                            select s;
             if (!String.IsNullOrEmpty(searchString))
@@ -42,7 +56,9 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
                     contacts = contacts.OrderBy(s => s.LastName);
                     break;
             }
-            return View(contacts.ToList());
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+            return View(contacts.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: ContactController/Details/5
