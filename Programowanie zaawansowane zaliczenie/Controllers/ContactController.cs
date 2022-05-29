@@ -22,6 +22,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.List = _context.ContactCategories.ToList();
             ViewBag.CurrentSort = sortOrder;
             ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
             ViewBag.CategorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
@@ -64,6 +65,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController/Details/5
         public async Task<IActionResult> Details(uint? id)
         {
+            ViewBag.List = _context.ContactCategories.ToList();
             if (id == null)
             {
                 return NotFound();
@@ -106,6 +108,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController/Edit/5
         public async Task<IActionResult> Edit(uint? id)
         {
+            ViewBag.List = _context.ContactCategories.ToList();
             if (id == null)
             {
                 return NotFound();
