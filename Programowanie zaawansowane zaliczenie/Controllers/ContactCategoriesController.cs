@@ -148,7 +148,8 @@ namespace Programowanie_zaawansowanie_zaliczenie.Controllers
             return _context.ContactCategories.Any(e => e.Id == id);
         }
 
-        public List<string> Test()
+
+        /*public List<string> Test()
         {
             List<string> test = new();
             for (int i = 0; i < _context.ContactCategories.ToList().Count; i++)
@@ -159,7 +160,7 @@ namespace Programowanie_zaawansowanie_zaliczenie.Controllers
                 }
             }
             return test;
-        }
+        }*/
         /*private static List<ContactCategories> contactsCategories = new List<ContactCategories>()
 {
    new ContactCategories(){ Id=1,CategoryName="test" },

@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using X.PagedList;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
 {
@@ -84,7 +86,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController/Create
         public IActionResult Create()
         {
-            ViewBag.List = _context.ContactCategories.ToList();
+            ContactCategoriesDropDownList();
             return View();
         }
 
@@ -93,15 +95,23 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Adress,PhoneNumber,Email,FbLink,ContactCategory")] ContactVievModel contactVievModel)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PhoneNumber,Email,FbLink,ContactCategoryID")] ContactVievModel contactVievModel)
         {
-            
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(contactVievModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(contactVievModel);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            ContactCategoriesDropDownList(contactVievModel.ContactCategoryID);
             return View(contactVievModel);
         }
 
@@ -119,6 +129,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
             {
                 return NotFound();
             }
+            ContactCategoriesDropDownList(contact.ContactCategoryID);
             return View(contact);
         }
 
@@ -127,7 +138,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(uint id, [Bind("Id,FirstName,LastName,Adress,PhoneNumber,Email,FbLink,ContactCategory")] ContactVievModel contactVievModel)
+        public async Task<IActionResult> Edit(uint id, [Bind("Id,FirstName,LastName,Adress,PhoneNumber,Email,FbLink,ContactCategoryID")] ContactVievModel contactVievModel)
         {
             if (id != contactVievModel.Id)
             {
@@ -154,6 +165,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ContactCategoriesDropDownList(contactVievModel.ContactCategoryID);
             return View(contactVievModel);
         }
 
@@ -189,6 +201,13 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         private bool ContactExists(uint id)
         {
             return _context.ContactVievModel.Any(e => e.Id == id);
+        }
+        private void ContactCategoriesDropDownList(object selectedCategory = null)
+        {
+            var categoriesQuery = from d in _context.ContactCategories
+                                  orderby d.CategoryName
+                                  select d;
+            ViewBag.ContactCategoryID = new SelectList(categoriesQuery, "Id", "CategoryName", selectedCategory);
         }
         /*private readonly DatabaseContext _context;
         private static IList<ContactVievModel> Contacts = new List<ContactVievModel>()

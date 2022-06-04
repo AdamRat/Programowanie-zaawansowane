@@ -28,8 +28,9 @@ namespace Programowanie_zaawansowane_zaliczenie.Models
         [DisplayName("Facebook link")]
         public string FbLink { get; set; }
         [DisplayName("Kategoria")]
-        public ContactCategories ContactCategory { get; set; }
-
+        public uint ContactCategoryID { get; set; }
+        [DisplayName("Kategoria")]
+        public virtual ContactCategories ContactCategory { get; set; }
 
     }
 }
