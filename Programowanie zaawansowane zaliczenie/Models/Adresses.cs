@@ -4,7 +4,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Models
 {
     public class Adresses
     {
-        public uint Id { get; set; }
+        public int Id { get; set; }
         [DisplayName("Ulica i numer")]
         public string Street { get; set; }
         [DisplayName("Kod pocztowy")]

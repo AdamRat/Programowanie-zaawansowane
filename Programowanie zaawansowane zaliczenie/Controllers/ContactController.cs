@@ -154,7 +154,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactExists(contactVievModel.Id))
+                    if (!ContactExists(((uint)contactVievModel.Id)))
                     {
                         return NotFound();
                     }

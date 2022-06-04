@@ -100,7 +100,7 @@ namespace Programowanie_zaawansowanie_zaliczenie.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactCategoriesExists(contactCategories.Id))
+                    if (!ContactCategoriesExists(((uint)contactCategories.Id)))
                     {
                         return NotFound();
                     }
