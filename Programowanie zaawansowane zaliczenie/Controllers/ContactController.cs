@@ -24,7 +24,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewBag.List = _context.ContactCategories.ToList();
+            ContactCategoriesDropDownList();
             ViewBag.CurrentSort = sortOrder;
             ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
             ViewBag.CategorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
@@ -67,7 +67,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // GET: ContactController/Details/5
         public async Task<IActionResult> Details(uint? id)
         {
-            ViewBag.List = _context.ContactCategories.ToList();
+            ContactCategoriesDropDownList();
             if (id == null)
             {
                 return NotFound();
@@ -87,6 +87,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         public IActionResult Create()
         {
             ContactCategoriesDropDownList();
+            //ContactCategoriesDropDownList();
             return View();
         }
 
@@ -111,14 +112,14 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.)
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
-            ContactCategoriesDropDownList(contactVievModel.ContactCategoryID);
+            //ContactCategoriesDropDownList(contactVievModel.ContactCategoryID);
             return View(contactVievModel);
         }
 
         // GET: ContactController/Edit/5
-        public async Task<IActionResult> Edit(uint? id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            ViewBag.List = _context.ContactCategories.ToList();
+            ContactCategoriesDropDownList();
             if (id == null)
             {
                 return NotFound();
@@ -129,7 +130,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
             {
                 return NotFound();
             }
-            ContactCategoriesDropDownList(contact.ContactCategoryID);
+            //ContactCategoriesDropDownList(contact.ContactCategoryID);
             return View(contact);
         }
 
@@ -165,7 +166,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ContactCategoriesDropDownList(contactVievModel.ContactCategoryID);
+            //ContactCategoriesDropDownList(contactVievModel.ContactCategoryID);
             return View(contactVievModel);
         }
 
@@ -202,13 +203,17 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         {
             return _context.ContactVievModel.Any(e => e.Id == id);
         }
-        private void ContactCategoriesDropDownList(object selectedCategory = null)
+        private void ContactCategoriesDropDownList()
         {
-            var categoriesQuery = from d in _context.ContactCategories
-                                  orderby d.CategoryName
-                                  select d;
-            ViewBag.ContactCategoryID = new SelectList(categoriesQuery, "Id", "CategoryName", selectedCategory);
+            ViewBag.List = _context.ContactCategories.ToList();
         }
+        //private void ContactCategoriesDropDownList(object selectedCategory = null)
+        //{
+        //    var categoriesQuery = from d in _context.ContactCategories
+        //                          orderby d.CategoryName
+        //                          select d;
+        //    ViewBag.ContactCategoryID = new SelectList(categoriesQuery, "Id", "CategoryName", selectedCategory);
+        //}
         /*private readonly DatabaseContext _context;
         private static IList<ContactVievModel> Contacts = new List<ContactVievModel>()
         {
