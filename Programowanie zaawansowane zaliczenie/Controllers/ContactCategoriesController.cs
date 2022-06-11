@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using Programowanie_zaawansowane_zaliczenie.Areas.Identity.Data;
 
 namespace Programowanie_zaawansowanie_zaliczenie.Controllers
 {

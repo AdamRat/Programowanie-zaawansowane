@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Programowanie_zaawansowane_zaliczenie;
+using Programowanie_zaawansowane_zaliczenie.Areas.Identity.Data;
 
 namespace Programowanie_zaawansowane_zaliczenie.Migrations
 {

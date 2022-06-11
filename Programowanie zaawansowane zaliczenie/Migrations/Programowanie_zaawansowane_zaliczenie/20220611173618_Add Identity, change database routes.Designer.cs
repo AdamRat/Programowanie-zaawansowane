@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Programowanie_zaawansowane_zaliczenie.Areas.Identity.Data;
 
-namespace Programowanie_zaawansowane_zaliczenie.Migrations
+namespace Programowanie_zaawansowane_zaliczenie.Migrations.Programowanie_zaawansowane_zaliczenie
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220611173618_Add Identity, change database routes")]
+    partial class AddIdentitychangedatabaseroutes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using X.PagedList;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Storage;
+using Programowanie_zaawansowane_zaliczenie.Areas.Identity.Data;
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
 {

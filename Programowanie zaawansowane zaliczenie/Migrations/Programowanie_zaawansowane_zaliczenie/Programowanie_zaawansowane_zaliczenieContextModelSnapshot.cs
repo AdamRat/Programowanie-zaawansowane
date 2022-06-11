@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Programowanie_zaawansowane_zaliczenie.Areas.Identity.Data;
 
-namespace Programowanie_zaawansowane_zaliczenie.Migrations
+namespace Programowanie_zaawansowane_zaliczenie.Migrations.Programowanie_zaawansowane_zaliczenie
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    partial class Programowanie_zaawansowane_zaliczenieContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -155,9 +155,11 @@ namespace Programowanie_zaawansowane_zaliczenie.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
@@ -195,9 +197,11 @@ namespace Programowanie_zaawansowane_zaliczenie.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
@@ -206,79 +210,6 @@ namespace Programowanie_zaawansowane_zaliczenie.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Programowanie_zaawansowane_zaliczenie.Models.Adresses", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PostCode")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Adresses");
-                });
-
-            modelBuilder.Entity("Programowanie_zaawansowane_zaliczenie.Models.ContactCategories", b =>
-                {
-                    b.Property<uint>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContactCategories");
-                });
-
-            modelBuilder.Entity("Programowanie_zaawansowane_zaliczenie.Models.ContactVievModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AdressId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<uint>("ContactCategoryID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FbLink")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdressId");
-
-                    b.HasIndex("ContactCategoryID");
-
-                    b.ToTable("ContactVievModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -330,23 +261,6 @@ namespace Programowanie_zaawansowane_zaliczenie.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Programowanie_zaawansowane_zaliczenie.Models.ContactVievModel", b =>
-                {
-                    b.HasOne("Programowanie_zaawansowane_zaliczenie.Models.Adresses", "Adress")
-                        .WithMany()
-                        .HasForeignKey("AdressId");
-
-                    b.HasOne("Programowanie_zaawansowane_zaliczenie.Models.ContactCategories", "ContactCategory")
-                        .WithMany()
-                        .HasForeignKey("ContactCategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Adress");
-
-                    b.Navigation("ContactCategory");
                 });
 #pragma warning restore 612, 618
         }

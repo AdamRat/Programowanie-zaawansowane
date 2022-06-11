@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Programowanie_zaawansowane_zaliczenie.Areas.Identity.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,13 +32,26 @@ namespace Programowanie_zaawansowane_zaliczenie
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-
             services.AddDbContext<DatabaseContext>(options =>
-                    //options.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DatabaseContextConnection")));
+            //services.AddDatabaseDeveloperPageExceptionFilter();
 
-                    options.UseSqlite($"Data Source={System.IO.Path.Join(Path.Combine(Directory.GetCurrentDirectory()), @"Data\Contacts.db")}"));
+            services.AddIdentity<IdentityUser, IdentityRole>(
+                options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    options.SignIn.RequireConfirmedAccount = false;
+                })
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
+                .AddSignInManager<SignInManager<IdentityUser>>()
+                .AddUserManager<UserManager<IdentityUser>>()
+                .AddEntityFrameworkStores<DatabaseContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +78,8 @@ namespace Programowanie_zaawansowane_zaliczenie
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Contact}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
