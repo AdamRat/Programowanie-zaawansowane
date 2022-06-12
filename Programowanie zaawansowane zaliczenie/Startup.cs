@@ -52,6 +52,7 @@ namespace Programowanie_zaawansowane_zaliczenie
                 .AddSignInManager<SignInManager<IdentityUser>>()
                 .AddUserManager<UserManager<IdentityUser>>()
                 .AddEntityFrameworkStores<DatabaseContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,7 +72,7 @@ namespace Programowanie_zaawansowane_zaliczenie
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
