@@ -10,9 +10,11 @@ using X.PagedList;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Storage;
 using Programowanie_zaawansowane_zaliczenie.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Programowanie_zaawansowane_zaliczenie.Controllers
 {
+    [Authorize]
     public class ContactController : Controller
     {
         private readonly DatabaseContext _context;

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using Programowanie_zaawansowane_zaliczenie.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Programowanie_zaawansowanie_zaliczenie.Controllers
 {
+    [Authorize]
     public class ContactCategoriesController : Controller
     {
         private readonly DatabaseContext _context;

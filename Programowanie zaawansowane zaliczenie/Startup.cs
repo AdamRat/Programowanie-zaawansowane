@@ -52,6 +52,13 @@ namespace Programowanie_zaawansowane_zaliczenie
                 .AddSignInManager<SignInManager<IdentityUser>>()
                 .AddUserManager<UserManager<IdentityUser>>()
                 .AddEntityFrameworkStores<DatabaseContext>();
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizePage("/Contact");
+                options.Conventions.AuthorizePage("/ContactCategories");
+                options.Conventions.AuthorizeFolder("/Contact");
+                options.Conventions.AuthorizeFolder("/ContactCategories");
+            });
 
         }
 
