@@ -33,7 +33,10 @@ namespace Programowanie_zaawansowane_zaliczenie.Areas.Identity.Pages.Account.Man
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Numer telefonu")]
+            [StringLength(12, ErrorMessage = "{0} musi mieć minimum {2} i max {1} znaków.", MinimumLength = 9)]
+            [RegularExpression(@"^[0-9]*$",
+                   ErrorMessage = "Wymagane same cyfry w numerze.")]
             public string PhoneNumber { get; set; }
         }
 
@@ -88,7 +91,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Areas.Identity.Pages.Account.Man
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Konto zostało zaktualizowane";
             return RedirectToPage();
         }
     }

@@ -49,8 +49,8 @@ namespace Programowanie_zaawansowane_zaliczenie.Areas.Identity.Pages.Account.Man
                 personalData.Add($"{l.LoginProvider} external login provider key", l.ProviderKey);
             }
 
-            Response.Headers.Add("Content-Disposition", "attachment; filename=PersonalData.json");
-            return new FileContentResult(JsonSerializer.SerializeToUtf8Bytes(personalData), "application/json");
+            Response.Headers.Add("Content-Disposition", "attachment; filename=DanePersonalne.txt");
+            return new FileContentResult(JsonSerializer.SerializeToUtf8Bytes(personalData), "application/txt");
         }
     }
 }
