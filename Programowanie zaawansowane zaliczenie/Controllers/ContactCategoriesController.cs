@@ -40,7 +40,6 @@ namespace Programowanie_zaawansowanie_zaliczenie.Controllers
             {
                 return NotFound();
             }
-
             return View(contactCategories);
         }
 

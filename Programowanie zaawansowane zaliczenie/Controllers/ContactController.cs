@@ -77,12 +77,12 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
             }
 
             var contact = await _context.ContactVievModel
+                .Include(m => m.Adress)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (contact == null)
             {
                 return NotFound();
             }
-
             return View(contact);
         }
 
@@ -128,7 +128,11 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
                 return NotFound();
             }
 
-            var contact = await _context.ContactVievModel.FindAsync(id);
+            //var contact = await _context.ContactVievModel.FindAsync(id);
+            var contact = await _context.ContactVievModel
+                .Include(m => m.Adress)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (contact == null)
             {
                 return NotFound();
