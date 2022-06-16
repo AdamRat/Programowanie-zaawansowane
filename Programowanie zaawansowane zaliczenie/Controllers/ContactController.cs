@@ -200,8 +200,11 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var contact = await _context.ContactVievModel.FindAsync(id);
+            var contact = await _context.ContactVievModel
+                            .Include(m => m.Adress)
+                            .FirstOrDefaultAsync(m => m.Id == id);
             _context.ContactVievModel.Remove(contact);
+            _context.Adresses.Remove(contact.Adress);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
