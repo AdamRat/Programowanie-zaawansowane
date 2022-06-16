@@ -198,7 +198,7 @@ namespace Programowanie_zaawansowane_zaliczenie.Controllers
         // POST: ContactController/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(uint id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var contact = await _context.ContactVievModel.FindAsync(id);
             _context.ContactVievModel.Remove(contact);
