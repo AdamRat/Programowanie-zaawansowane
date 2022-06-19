@@ -26,23 +26,6 @@ namespace Programowanie_zaawansowanie_zaliczenie.Controllers
             return View(await _context.ContactCategories.ToListAsync());
         }
 
-        // GET: ContactCategoriesController/Details/5
-        public async Task<IActionResult> Details(uint? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contactCategories = await _context.ContactCategories
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (contactCategories == null)
-            {
-                return NotFound();
-            }
-            return View(contactCategories);
-        }
-
         // GET: ContactCategoriesController/Create
         public IActionResult Create()
         {
@@ -116,34 +99,6 @@ namespace Programowanie_zaawansowanie_zaliczenie.Controllers
             return View(contactCategories);
         }
 
-        // GET: ContactCategoriesController/Delete/5
-        public async Task<IActionResult> Delete(uint? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contactCategories = await _context.ContactCategories
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (contactCategories == null)
-            {
-                return NotFound();
-            }
-
-            return View(contactCategories);
-        }
-
-        // POST: ContactCategoriesController/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(uint id)
-        {
-            var contactCategories = await _context.ContactCategories.FindAsync(id);
-            _context.ContactCategories.Remove(contactCategories);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
         private bool ContactCategoriesExists(uint id)
         {
